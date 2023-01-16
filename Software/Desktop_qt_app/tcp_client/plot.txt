@@ -1,0 +1,78 @@
+#include "plot.h"
+#include "ui_plot.h"
+
+Plot::Plot(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::Plot)
+{
+    ui->setupUi(this);
+    bench = new Bench("","");
+    connect(ui->close_btn, SIGNAL(clicked()), this, SLOT(close()));
+
+    chart_view = new QChartView(this);
+    chart_view->setMinimumSize(1300, 850);
+    chart_view->setRenderHint(QPainter::Antialiasing);
+
+}
+
+void Plot::plot_show()
+{
+
+    if(bench->Spower_vec.size() > 0)
+    {
+        lseries = new QLineSeries();
+        for(int i = 0; i < bench->timestamp_vec.size(); i++)
+            lseries->append(bench->timestamp_vec[i], bench->Spower_vec[i]);
+
+        chart = new QChart();
+        chart->legend()->hide();
+        chart->setTitle("Power plot");
+
+        //Axis setting
+        QDateTimeAxis *axisX = new QDateTimeAxis();
+        axisX->setTickCount(5);
+        axisX->setFormat("hh:mm");
+        axisX->setTitleText("Время");
+        axisX->setRange(bench->date_vec.first(), bench->date_vec.last());
+        chart->addAxis(axisX, Qt::AlignBottom);
+        lseries->attachAxis(axisX);
+
+        QValueAxis *axisY = new QValueAxis();
+        axisY->setTickCount(25);
+        axisY->setLabelFormat("%.2f");
+        axisY->setTitleText("Полная мощность");
+        axisY->setMin(*std::min_element(bench->Spower_vec.constBegin(), bench->Spower_vec.constEnd()));
+        axisY->setMax(*std::max_element(bench->Spower_vec.constBegin(), bench->Spower_vec.constEnd()));
+        axisY->setRange(axisY->min(), axisY->max());
+        chart->addAxis(axisY, Qt::AlignLeft);
+        lseries->attachAxis(axisY);
+
+        chart->addSeries(lseries);
+        qDebug() << lseries->count();
+        chart_view->setChart(chart);
+
+        this->show();
+
+    }
+    else
+        QMessageBox::warning(this, "", "Пока данных нет. Попробуйте переподключиться позже.");
+
+}
+
+void Plot::closeEvent(QCloseEvent *event)
+{
+    if (bench->Spower_vec.size() > 0)
+    {
+        event->accept();
+        qDebug() << "Graph was closed";
+    }
+    else
+    {
+        event->ignore();
+    }
+}
+
+Plot::~Plot()
+{
+    delete ui;
+}

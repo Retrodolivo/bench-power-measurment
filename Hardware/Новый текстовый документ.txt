@@ -1,0 +1,74 @@
+W5500, ИС Ethernet контроллера TCP/IP, [LQFP-48]
+https://www.chipdip.ru/product/w5500 5шт
+
+5027740891
+https://www.chipdip.ru/product1/8002009232 5шт
+
+TECAP, 10 мкФ, 16 В, тип A, 10%, Конденсатор танталовый SMD
+https://www.chipdip.ru/product0/373033076 20шт
+
+TECAP, 4.7 мкФ, 16 В, тип A, 10%, Конденсатор танталовый SMD
+https://www.chipdip.ru/product0/850917081 30шт
+
+AT24C128C-SSHM-B, Микросхема памяти EEPROM 128K I2C 1МГц [SOIC-8]
+https://www.chipdip.ru/product/at24c128c-sshm-b 5шт
+
+CM1624-08DE
+https://www.chipdip.ru/product1/8003359798 5шт
+
+MAX3485ECSA+T, Приемопередатчик RS-485/RS-422 с ограничением скорости нарастания выходного сигнала, 3.3В [SO-8]
+https://www.chipdip.ru/product/max3485ecsa 5шт
+
+0.125Вт 0805 120 Ом, 1%, Чип резистор (SMD)
+https://www.chipdip.ru/product0/9000079464 30шт
+
+0.125Вт 0805 2.4 кОм, 1%, Чип резистор (SMD)
+https://www.chipdip.ru/product0/9000079495 30шт
+
+С2-29-0,125-12,4К-0,25%-А
+https://www.chipdip.ru/product0/8002031178 6шт
+
+Кер.ЧИП конд. 0.01 мкФ 250В X7R 10% 0805 (10нф), GRM21BR72E103K
+https://www.chipdip.ru/product/grm21br72e103k 20шт
+
+BLM21PG331SN1D, 0805, Дроссель подавления ЭМП
+https://www.chipdip.ru/product/blm21pg331sn1d 20 шт
+
+0.125Вт 0805 330 Ом, 1%, Чип резистор (SMD)
+https://www.chipdip.ru/product0/9000079474 30шт
+
+IRLML6401TRPBF, Транзистор, P-канал 12В 4.3А logic [Micro3 / SOT-23]
+https://www.chipdip.ru/product/irlml6401tr 5шт
+
+KTR10EZPF49R9, SMD чип резистор, 49.9 Ом, ± 1%, 125 мВт, 0805 [2012 Метрический], Thick Film, High Voltage
+https://www.chipdip.ru/product0/9000664901 30шт
+
+0.125Вт 0805 10 Ом, 1%, Чип резистор (SMD)https://www.chipdip.ru/product0/9000079936
+https://www.chipdip.ru/product0/9000079936 30шт
+
+Кер.ЧИП конд. 0.022мкФ X7R 50В 10% 0805 (22нф), GRM216R71H223K
+https://www.chipdip.ru/product/grm216r71h223k 30шт
+
+TX3 25.0000 MHZ, кварцевый резонатор 25МГц 3.2*2.5*0.7 SMD 30ppm 12пФ (DSX321G KX-7)
+https://www.chipdip.ru/product0/8000664246 5шт
+
+0.125Вт 0805 1 МОм, 1%, Чип резистор (SMD)
+https://www.chipdip.ru/product0/9000079578 20шт
+
+Кер.ЧИП конд. 10пФ NPO 50В 5% 0805, GRM2165C1H100J**
+https://www.chipdip.ru/product/grm2165c1h100j 20шт
+
+Кер.ЧИП конд. 12пФ NPO 5% 200В 0805, GRM2195C2D120J
+https://www.chipdip.ru/product/grm2195c2d120j 20шт
+
+0.125Вт 0805 510 Ом, 1%, Чип резистор (SMD)
+https://www.chipdip.ru/product0/9000079479 20шт
+
+CR2032-VBY2, Элемент питания литиевый (1шт) 3В, 2 вывода, горизонтальный
+https://www.chipdip.ru/product/cr2032-vby2-fanso 5шт
+
+HR911105A, 8P8C розетка на плату RJ45 10/100Мб
+https://www.chipdip.ru/product/hr911105a 5шт
+
+LD1117DT33TR, LDO-регулятор напряжения, +3.3В, 0.8А [D-PAK]
+https://www.chipdip.ru/product/ld1117dt33 3шт
