@@ -77,42 +77,15 @@ static void MX_USART2_UART_Init(void);
 static void MX_TIM16_Init(void);
 static void MX_TIM17_Init(void);
 /* USER CODE BEGIN PFP */
-static void uint32_to_uint8_arr(uint32_t *u32, uint8_t *arr)
-{
-	if(sizeof(arr) == 4)
-	{
-		arr[0] = *u32 & 0x000000FF;
-		arr[1] = (*u32 & 0x0000FF00) >> 8;
-		arr[2] = (*u32 & 0x00FF0000) >> 16;
-		arr[3] = (*u32 & 0xFF000000) >> 24;
-	}
-	else
-		return;
-}
-
+//static void uint32_to_uint8_arr(uint32_t *u32, uint8_t *arr)
+//{
+//	arr[0] = *u32 & 0x000000FF;
+//	arr[1] = (*u32 & 0x0000FF00) >> 8;
+//	arr[2] = (*u32 & 0x00FF0000) >> 16;
+//	arr[3] = (*u32 & 0xFF000000) >> 24;
+//}
 void init_routine(void);
 
-void w5500_select()
-{
-    HAL_GPIO_WritePin(W5500_CS_GPIO_Port, W5500_CS_Pin, GPIO_PIN_RESET);
-}
-
-void w5500_unselect()
-{
-    HAL_GPIO_WritePin(W5500_CS_GPIO_Port, W5500_CS_Pin, GPIO_PIN_SET);
-}
-
-uint8_t w5500_read_byte(void)
-{
-    uint8_t w5500_buf;
-    HAL_SPI_Receive(W5500_SPI_PORT, &w5500_buf, 1, 0xFFFFFFFF);
-    return w5500_buf;
-}
-
-void w5500_write_byte(uint8_t b)
-{
-    HAL_SPI_Transmit(W5500_SPI_PORT, &b, 1, 0xFFFFFFFF);
-}
 
 /* USER CODE END PFP */
 
@@ -124,6 +97,8 @@ Power_t power;
 Bench_state_t bench_state;
 uint8_t merc_addr = MERC_NET_ADDR;
 
+w5500chip_t w5500;
+
 SD_t sd =
 {
 	.blocks_num = 0,
@@ -133,15 +108,7 @@ SD_t sd =
 };
 int8_t status_sd = 0;
 
-wiz_NetInfo w5500_netinfo =
-{
-	.mac = {0x00, 0x08, 0xdc, 0xab, 0xcd, 0xef},
-	.ip = {169, 254, 42, 16},
-	.sn = {255, 255, 0, 0}, 		//subnet mask
-	.gw = {169, 254, 42, 123}		//gateway address
-};
 uint32_t timestamp_arr[64];
-uint8_t w5500_rx_tx_buf_size[] = {16, 0, 0, 0, 16, 0, 0, 0};
 Tcp_device_t tcp_device;
 /*counters and flags*/
 uint32_t i = 0;
@@ -654,7 +621,7 @@ void init_routine(void)
 	HAL_NVIC_SetPriority(TIM16_IRQn, 0, 0);		//power counter polling timer
 	HAL_NVIC_SetPriority(TIM17_IRQn, 1, 0);		//ETH controller polling timer
 	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 2, 0); //bench states
-	HAL_NVIC_SetPriority(EXTI9_5_IRQn, 2, 0);	//
+	HAL_NVIC_SetPriority(EXTI9_5_IRQn, 2, 0);
 
 	/*---------SD CARD-------------*/
 	status_sd = sd_init();
@@ -690,17 +657,14 @@ void init_routine(void)
 	sd_read_end();
 	sd.after_reboot_block_addr--;
 	sd.block_addr = sd.after_reboot_block_addr; //from here we start write next time
+
 	/*---------W5500 ETHERNET-------------*/
-	reg_wizchip_cs_cbfunc(w5500_select, w5500_unselect);
-	reg_wizchip_spi_cbfunc(w5500_read_byte, w5500_write_byte);
-	wizchip_init(w5500_rx_tx_buf_size, w5500_rx_tx_buf_size);
-	wizchip_setnetinfo(&w5500_netinfo);
-	/*after _getnetinfo w5500_netinfo should stay the same*/
-	wizchip_getnetinfo(&w5500_netinfo);
+	w5500_init(&w5500);
 	while((tcp_init = tcp_server_init(SOCKET_0) != 1))
 	{
 	}
 	tcp_cmds_init(&tcp_device);
+
 	/*---------MERCURY-------------*/
 	status_merc = Mercury_init();
 	/*-----------------------------*/
@@ -708,6 +672,7 @@ void init_routine(void)
 	HAL_TIM_Base_Start_IT(&htim16);
 	/*enable timer interrupt for ethernet controller*/
 	HAL_TIM_Base_Start_IT(&htim17);
+
 }
 /* USER CODE END 4 */
 

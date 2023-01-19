@@ -32,16 +32,18 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "mercury.h"
-#include "sd_card.h"
+#include <string.h>
+#include <stdbool.h>
+
 #include "socket.h"
 #include "w5500.h"
 #include "wizchip_conf.h"
+
+#include "mercury.h"
+#include "sd_card.h"
+#include "wizchip.h"
 #include "tcp.h"
 #include "rtc.h"
-
-#include <string.h>
-#include <stdbool.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -119,7 +121,7 @@ void Error_Handler(void);
 #define SWO_Pin GPIO_PIN_3
 #define SWO_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
-#define W5500_SPI_PORT	&hspi3
+
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
