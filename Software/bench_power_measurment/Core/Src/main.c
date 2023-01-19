@@ -136,9 +136,9 @@ int8_t status_sd = 0;
 wiz_NetInfo w5500_netinfo =
 {
 	.mac = {0x00, 0x08, 0xdc, 0xab, 0xcd, 0xef},
-	.ip = {169, 254, 28, 12},
+	.ip = {169, 254, 42, 16},
 	.sn = {255, 255, 0, 0}, 		//subnet mask
-	.gw = {169, 254, 28, 123}		//gateway address
+	.gw = {169, 254, 42, 123}		//gateway address
 };
 uint32_t timestamp_arr[64];
 uint8_t w5500_rx_tx_buf_size[] = {16, 0, 0, 0, 16, 0, 0, 0};
@@ -695,6 +695,8 @@ void init_routine(void)
 	reg_wizchip_spi_cbfunc(w5500_read_byte, w5500_write_byte);
 	wizchip_init(w5500_rx_tx_buf_size, w5500_rx_tx_buf_size);
 	wizchip_setnetinfo(&w5500_netinfo);
+	/*after _getnetinfo w5500_netinfo should stay the same*/
+	wizchip_getnetinfo(&w5500_netinfo);
 	while((tcp_init = tcp_server_init(SOCKET_0) != 1))
 	{
 	}
