@@ -169,8 +169,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		if(tcp_client_check(SOCKET_0) == SOCK_ESTABLISHED && sys_msg == NOT_SENT)
 		{
 			/*send sys messages*/
-			tcp_send_msg(SOCKET_0, w5500.netinfo.ip, sizeof(w5500.netinfo.ip));
-			tcp_send_msg(SOCKET_0, &merc_addr, sizeof(merc_addr));
+//			tcp_send_msg(SOCKET_0, w5500.netinfo.ip, sizeof(w5500.netinfo.ip));
+//			tcp_send_msg(SOCKET_0, &merc_addr, sizeof(merc_addr));
 			sys_msg = SENT;
 			/*an amount of sd blocks would be transmit*/
 			uint32_t blocks_cnt = sd.block_addr - sd.start_block_addr;
@@ -340,19 +340,19 @@ static void MX_RTC_Init(void)
   sTime.Seconds = 0x0;
   sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sTime.StoreOperation = RTC_STOREOPERATION_RESET;
-  if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)
-  {
-    Error_Handler();
-  }
+//  if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)
+//  {
+//    Error_Handler();
+//  }
   sDate.WeekDay = RTC_WEEKDAY_MONDAY;
   sDate.Month = RTC_MONTH_JANUARY;
   sDate.Date = 0x1;
   sDate.Year = 0x0;
 
-  if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
-  {
-    Error_Handler();
-  }
+//  if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
+//  {
+//    Error_Handler();
+//  }
   /* USER CODE BEGIN RTC_Init 2 */
 
   /* USER CODE END RTC_Init 2 */
@@ -631,11 +631,11 @@ void init_routine(void)
 	uint8_t blank_block[512];
 	memset(blank_block, 0, sizeof(blank_block));
 
-//	//do erase of sd card blocks
-//	sd_write_begin(sd.block_addr);
-//	for(uint32_t i = 0; i < 5000; i++)
-//		sd_write_data(blank_block);
-//	sd_write_end();
+	//do erase of sd card blocks
+	sd_write_begin(sd.block_addr);
+	for(uint32_t i = 0; i < 500; i++)
+		sd_write_data(blank_block);
+	sd_write_end();
 
 	//check last write sector addr. Should find first empty blank;
 	sd.after_reboot_block_addr = sd.start_block_addr;
