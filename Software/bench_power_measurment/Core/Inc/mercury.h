@@ -3,8 +3,8 @@
 
 #include "main.h"
 
-#define MERC_NET_ADDR					0x34 		/*last 2 digits of serial number*/
-#define TRANS_TIMEOUT					5				/*9600 baud*/
+#define MERC_NET_ADDR					0x59 		/*last 2 digits of serial number*/
+#define TRANS_TIMEOUT					5			/*5ms for 9600 baud*/
 /*------------REQUESTS_NAMES----------------*/
 #define NET_TEST_CMD					0
 #define SER_NUM_CMD						1

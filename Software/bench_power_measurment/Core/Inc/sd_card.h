@@ -22,17 +22,17 @@ typedef struct
 
 int sd_init(void);
 int sd_get_blocks_num(uint32_t* num);
-int sd_read_single_block(uint32_t blockNum, uint8_t* buff); // sizeof(buff) == 512!
-int sd_write_single_block(uint32_t blockNum, const uint8_t* buff); // sizeof(buff) == 512!
+int sd_read_single_block(uint32_t blockNum, uint8_t* buff); 			// sizeof(buff) == 512!
+int sd_write_single_block(uint32_t blockNum, const uint8_t* buff); 		// sizeof(buff) == 512!
 
 // Read Multiple Blocks
 int sd_read_begin(uint32_t blockNum);
-int sd_read_data(uint8_t* buff); // sizeof(buff) == 512!
+int sd_read_data(uint8_t* buff);										// sizeof(buff) == 512!
 int sd_read_end(void);
 
 // Write Multiple Blocks
 int sd_write_begin(uint32_t blockNum);
-int sd_write_data(const uint8_t* buff); // sizeof(buff) == 512!
+int sd_write_data(const uint8_t* buff); 								// sizeof(buff) == 512!
 int sd_write_end(void);
 
 // TODO: read lock flag? CMD13, SEND_STATUS

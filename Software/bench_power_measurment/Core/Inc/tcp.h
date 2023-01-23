@@ -19,7 +19,7 @@
 #define TCP_RX_DATA_SIZE		50
 #define TCP_TX_DATA_SIZE		50
 #define NUMBER_OF_CMDS			5
-#define CMD_LENGHT					20
+#define CMD_LENGHT				20
 
 typedef struct
 {

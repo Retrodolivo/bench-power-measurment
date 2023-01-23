@@ -94,16 +94,17 @@ void init_routine(void);
 Response_all_t resp_all;
 Status_merc_t status_merc;
 Power_t power;
-Bench_state_t bench_state;
 uint8_t merc_addr = MERC_NET_ADDR;
+Bench_state_t bench_state;
 
+/*configured at wizchip.c*/
 w5500chip_t w5500;
 
 SD_t sd =
 {
 	.blocks_num = 0,
 	.start_block_addr = 0x00ABCD,
-	.block_addr = 0x00ABCD, //equal .start_block_addr
+	.block_addr = 0x00ABCD, 			//equal .start_block_addr
 	.after_reboot_block_addr = 0
 };
 int8_t status_sd = 0;
@@ -168,8 +169,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		if(tcp_client_check(SOCKET_0) == SOCK_ESTABLISHED && sys_msg == NOT_SENT)
 		{
 			/*send sys messages*/
-//			tcp_send_msg(SOCKET_0, w5500_netinfo.ip, sizeof(w5500_netinfo.ip));
-//			tcp_send_msg(SOCKET_0, &merc_addr, sizeof(merc_addr));
+			tcp_send_msg(SOCKET_0, w5500.netinfo.ip, sizeof(w5500.netinfo.ip));
+			tcp_send_msg(SOCKET_0, &merc_addr, sizeof(merc_addr));
 			sys_msg = SENT;
 			/*an amount of sd blocks would be transmit*/
 			uint32_t blocks_cnt = sd.block_addr - sd.start_block_addr;
@@ -632,7 +633,7 @@ void init_routine(void)
 
 //	//do erase of sd card blocks
 //	sd_write_begin(sd.block_addr);
-//	for(uint32_t i = 0; i < 500; i++)
+//	for(uint32_t i = 0; i < 5000; i++)
 //		sd_write_data(blank_block);
 //	sd_write_end();
 
